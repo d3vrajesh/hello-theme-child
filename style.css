@@ -1,0 +1,133 @@
+/* 
+Theme Name: Hello Elementor Child
+Theme URI: https://github.com/elementor/hello-theme/
+Description: Hello Elementor Child is a child theme of Hello Elementor, created by Rajesh for NNHS Website
+Author: Rajesh
+Author URI: https://codeplanet.in/
+Template: hello-elementor
+Version: 1.0.1
+Text Domain: hello-elementor-child
+License: GNU General Public License v3 or later.
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
+Tags: flexible-header, custom-colors, custom-menu, custom-logo, editor-style, featured-images, rtl-language-support, threaded-comments, translation-ready, cutom-template, registration-form
+*/
+
+/*
+    Add your custom styles here
+*/
+
+.page-container {
+  align-items: center;
+}
+
+.mform-title {
+  text-align: center;
+  font-size: 20pt;
+  font-weight: bold;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #64282a;
+}
+
+* {
+  box-sizing: border-box
+}
+
+/* Add padding to containers */
+
+.container {
+  padding: 30px;
+  width: 60%;
+  margin: auto;
+  border: 1px solid #2f261a;
+  border-radius: 10px;
+}
+
+/* Full-width input fields */
+
+input[type=text], input[type=date] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+.textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}   
+
+
+input[type=text]:focus, input[type=date]:focus, textarea:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+input[type=number] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=number]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+select {
+width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+select:focus {
+  background-color: #ddd;
+  outline: none;
+}
+.form-field-50 {
+  width: 100%;
+}
+/* Overwrite default styles of hr */
+
+/* Set a style for the submit/register button */
+
+.mform-btn-container {
+  width: auto;
+}
+
+.mform-btn {
+  width: 30%;
+  margin: auto;
+  padding: 20px;
+}
+
+.registerbtn {
+  background-color: #3a2810;
+  color: white;
+  padding: 16px 20px;
+  margin: auto;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+  background-color: #98b827;
+}
+.membership-error {
+  color: #FF0000;
+}
+.full-flow {
+  overflow-x:auto;
+}
