@@ -41,7 +41,7 @@ require_once("functions.php");
                     }
             ?>
 
-
+<!----Match form input fields with membership plugin and adatabse columns --> 
             <p><span class="membership-error">Fields marked with * are required</span></p>
             <label for="mname"><b>Name</b></label> <span class="membership-error">* <?php echo $errorfname ;?></span>
             <input type="text" placeholder="Name" name="mname" maxlength="20"
