@@ -101,12 +101,6 @@ require_once("functions.php");
                 value="<?= isset($_POST['minterest']) ? $_POST['minterest'] : ''; ?>"
                 required> Describe your Nature of Interest..</textarea>
 
-            <label for="mamount"><b>Amount Rs.</b></label><span class="membership-error">*
-                <?php echo $errorfamount ;?></span>
-            <select name="mamount" value="<?= isset($_POST['mamount']) ? $_POST['mamount'] : ''; ?>" required>
-                <option value="1000">1,000/-</option>
-            </select>
-
             <label for="mrefname"><b>Referred by NNHS member (Please mention Name) </b></label><span
                 class="membership-error">* <?php echo $errorfrefnamet ;?></span>
             <input type="text" placeholder="Referral member's name" name="mrefname"
@@ -120,6 +114,12 @@ require_once("functions.php");
             <label for="place"><b>Place </b></label><span class="membership-error">* <?php $errorfplace ;?></span>
             <input type="text" placeholder="place" name="mplace"
                 value="<?= isset($_POST['mplace']) ? $_POST['mplace'] : ''; ?>" required>
+
+            <label for="mamount"><b>Amount Rs.</b></label><span class="membership-error">*
+                <?php echo $errorfamount ;?></span>
+            <select name="mamount" value="<?= isset($_POST['mamount']) ? $_POST['mamount'] : ''; ?>" required>
+                <option value="1000">1,000/-</option>
+            </select>    
 
             <label for="mupload"><b>Photo upload (Passport size, less than 500kb) </b></label><span
                 class="membership-error">* <?php echo $errorfupload ;?></span>
