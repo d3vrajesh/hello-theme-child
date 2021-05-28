@@ -42,7 +42,7 @@ require_once("functions.php");
             ?>
 
 
-            <p><span class="membership-error">* required field</span></p>
+            <p><span class="membership-error">Fields marked with * are required</span></p>
             <label for="mname"><b>Name</b></label> <span class="membership-error">* <?php echo $errorfname ;?></span>
             <input type="text" placeholder="Name" name="mname" maxlength="20"
                 value="<?= isset($_POST['mname']) ? $_POST['mname'] : ''; ?>" required>
