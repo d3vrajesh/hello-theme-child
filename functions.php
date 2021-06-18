@@ -40,10 +40,10 @@ function my_custom_script_load(){
 if(isset($_POST['formsubmit']))
 {
 
- //------Databse Access --------------
-	global $wpdb;
+ 
 
  //------Variable mapping with html input fields using name --------------
+		$mem_type = $_POST['mem_type'];
 		$mname = $_POST["mname"]; 
 		$mdob = $_POST["mdob"];
 		$maddress = $_POST["maddress"];
@@ -56,21 +56,24 @@ if(isset($_POST['formsubmit']))
 		$mplaceins = $_POST["mplaceins"];
 		$mdesignation = $_POST["mdesignation"];
 		$minterest = $_POST["minterest"];
-		$mamount = $_POST["mamount"];
 		$mrefname = $_POST["mrefname"];
 		$mrefdet = $_POST["mrefdet"];
+		$m_id_type = $_POST["mem_id_proof_type"];
+		$m_id_no = $_POST["mem_id_proof_no"];
+		$mamount = $_POST["mamount"];
 		$mplace = $_POST["mplace"];
 		$mdate =  date('Y-m-d');
  
 	//-----------Form input Validation-----------	
 	$error = array();
-
+	
 	//-----Name - input text validation 
 	$fname = "/^[a-zA-Z\s]+$/";
 	if (!preg_match($fname, $mname)) {
 		$error['fname'] = "Invalid input";
 		$errorfname = "Invalid Input.";
 	}
+
 	//-----Address - input text validation 
 
 	$faddress = "/^[A-Za-z0-9\s\-\,]+$/";
@@ -169,7 +172,24 @@ if(isset($_POST['formsubmit']))
 		$errorfrefdet = "Not a valid input.";		
 	 
 	} 
+	/*
+	 =======================================
+	//-----ID Proof Number  - input text validation
+	$f_id_proof_no = "/^[0-9]+$/";
+	$f_id_proof_length = strlen($_POST["mrefdet"]);
 	 
+	if ((empty($m_id_no) == false) && (!preg_match($f_id_proof_no, $m_id_no)))
+	{
+		$error['frefdet'] = "Not a valid input";
+		$errorfrefdet = "Not a valid input.";		
+	}
+	
+	if ((!preg_match($frefdet, $mrefdet) == false) && ($frefmobno != 10))
+	{
+		$error['frefdetmob'] = "Not a valid Aadhar Number";
+		$errorfrefdet = "Not a valid Aadhar Number.";		
+	 
+	} */
 
 	//-----Place of application - input text validation
 	$fplace = "/^[a-zA-Z]+$/";
@@ -202,12 +222,17 @@ if(isset($_POST['formsubmit']))
 	$mupload_url = $upload_dir['url']; 
 	$mupload = $mupload_url . "/" . $_FILES['mupload']['name'];
 
+
+//------Databse Access --------------
+	global $wpdb;
+	$nnhs_table_name = $wpdb->prefix . 'members_list';
 	//-----Save form data in Database  
 	if (count($error) == 0) {
 		$data_array = array(
-			'name' => $mname,
+			'membership_type' => $mem_type,
+			'applicant_name' => $mname,
 			'dob' => $mdob,
-			'address' => $maddress,
+			'contact_address' => $maddress,
 			'tel_res' => $mtelres,
 			'tel_off' => $mteloff,
 			'mob' => $mmob,
@@ -220,16 +245,20 @@ if(isset($_POST['formsubmit']))
 			'amount' => $mamount,
 			'ref_name' => $mrefname,
 			'ref_detail' => $mrefdet,
+			'id_proof_type' => $m_id_type,
+			'id_proof_no' => $m_id_no,
+			'amount' => $mamount,
+			'upload' => $mupload,
 			'place' => $mplace,
-			'date' => $mdate,
-			'upload' => $mupload
+			'app_date' => $mdate
+			
 			);
 
-				$table_name = 'wp_nnhs_membership';
-		$row_result = $wpdb->insert($table_name, $data_array, $format=null);
+		$row_result = $wpdb->insert($nnhs_table_name, $data_array, $format=null);
 		//wp_mail('rajeshr@keystone-foundation.org','Testing Form Submission',$message);
 		wp_upload_bits($_FILES['mupload']['name'], null, file_get_contents($_FILES['mupload']['tmp_name'])); 
 		$success = "Success";	
+		
 		
 	}
 	else {

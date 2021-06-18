@@ -131,3 +131,9 @@ select:focus {
 .full-flow {
   overflow-x:auto;
 }
+.img {
+  width: 70px;
+  height: 90px;
+  object-fit: contain;
+
+}
