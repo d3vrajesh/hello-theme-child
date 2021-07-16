@@ -36,8 +36,8 @@ function my_custom_script_load(){
   wp_enqueue_script( 'my-custom-script', get_stylesheet_directory_uri() . '/mform', array( 'jquery' ) );
 }
 
-//==================Membership form ============== 
-if(isset($_POST['formsubmit']))
+//==================Membership form - Individual ============== 
+if(isset($_POST['individual_submit']))
 {
 
  
@@ -217,11 +217,21 @@ if(isset($_POST['formsubmit']))
 		$errorfupload = "upload a png/jpeg/jpg file";
 		}
 		
+	
+	//----- Rename file on upload
+	
+	$upload_file = $_FILES['mupload']['name'];
+	$upload_file_extension =  end(explode('.', $_FILES['mupload']['name'])); // Get upload file extension
+	$rename_format = md5(rand());
+	//$rename_format = 'Membership'.date('Ymd').$random_no;
+	$new_upload_file = $rename_format .".".$upload_file_extension;
+
+
+
 	//-----Get file upload URL   
 	$upload_dir = wp_upload_dir();
 	$mupload_url = $upload_dir['url']; 
-	$mupload = $mupload_url . "/" . $_FILES['mupload']['name'];
-
+	$mupload = $mupload_url . "/" . $new_upload_file;
 
 //------Databse Access --------------
 	global $wpdb;
@@ -254,11 +264,9 @@ if(isset($_POST['formsubmit']))
 			
 			);
 
-		$row_result = $wpdb->insert($nnhs_table_name, $data_array, $format=null);
-		//wp_mail('rajeshr@keystone-foundation.org','Testing Form Submission',$message);
-		wp_upload_bits($_FILES['mupload']['name'], null, file_get_contents($_FILES['mupload']['tmp_name'])); 
-		$success = "Success";	
-		
+		$row_result = $wpdb->insert($nnhs_table_name, $data_array, $format=null);	
+	
+		wp_upload_bits($new_upload_file, null, file_get_contents($_FILES['mupload']['tmp_name'])); 		
 		
 	}
 	else {
