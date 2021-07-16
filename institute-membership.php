@@ -1,6 +1,6 @@
 <?php
 /*
- * Template Name: Individual_Membership
+ * Template Name: Institution_Membership
  */
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly.
@@ -46,23 +46,15 @@ require_once("functions.php");
 
             <label for="mem_type"><b>Membership Type</b></label> <span class="membership-error">* <?php echo $errorf_mem_type; ?></span>
             <select name="mem_type" value="<?= isset($_POST['mem_type']) ? $_POST['mem_type'] : ''; ?>" required>
-                        <option value="Individual">Individual</option>
-                        
-                    </select>
+                        <option value="Individual">Individual</option>                    </select>
 
-            <label for="mname"><b>Name</b></label> <span class="membership-error">* <?php echo $errorfname; ?></span>
+            <label for="mname"><b>Applicant Name</b></label> <span class="membership-error">* <?php echo $errorfname; ?></span>
             <input type="text" placeholder="Name" name="mname" maxlength="20"
                 value="<?= isset($_POST['mname']) ? $_POST['mname'] : ''; ?>" required>
-
-            <label for="mdob"><b>Date of Birth</b></label> <span class="membership-error">*
-                <?php echo $errorfdob; ?></span>
-            <input type="date" placeholder="Date of Birth" name="mdob"
-                value="<?= isset($_POST['mdob']) ? $_POST['mdob'] : ''; ?>" required>
-
-            <label for="maddress"><b>Address</b></label> <span class="membership-error">*
-                <?php echo $errorfaddress; ?></span>
-            <textarea name="maddress" rows="5" cols="33" class="textarea" maxlength="200"
-                value="<?= isset($_POST['maddress']) ? $_POST['maddress'] : ''; ?>" required> Address</textarea>
+            
+            <label for="mdesignation"><b>Designation</b></label><span class="membership-error">* <?php echo $errorfdesignation; ?></span>
+            <input type="text" placeholder="Designation" name="mdesignation"
+                value="<?= isset($_POST['mdesignation']) ? $_POST['mdesignation'] : ''; ?>" required>
 
             <label for="mtelres"><b>Telephne-Residential</b></label><span class="membership-error">
                 <?php echo $errorftelres; ?></span>
@@ -79,31 +71,20 @@ require_once("functions.php");
                 value="<?= isset($_POST['mmob']) ? $_POST['mmob'] : ''; ?>" required>
 
             <label for="memail"><b>Email</b></label><span class="membership-error">* <?php echo $errorfemail; ?></span>
-            <input type="text" placeholder="Enter Email" name="memail"
+            <input type="text" placeholder="Email" name="memail"
                 value="<?= isset($_POST['memail']) ? $_POST['memail'] : ''; ?>" required>
 
-            <label for="mprofession"><b>Profession</b></label><span class="membership-error">*
-                <?php echo $errorfprofession; ?></span>
-            <input type="text" placeholder="Profession" name="mprofession"
-                value="<?= isset($_POST['mprofession']) ? $_POST['mprofession'] : ''; ?>" required>
+                <label for="mtype_institution"><b>Type of Institution</b></label><span class="membership-error">*
+                <?php echo $errorftype_institution; ?></span>
+            <input type="text" placeholder="Type of Institution" name="mtype_institution"
+                value="<?= isset($_POST['mtype_institution']) ? $_POST['mtype_institution'] : ''; ?>" required>        
 
-            <label for="mnameins"><b>Name of Institution</b></label> <span class="membership-error">
-                <?php echo $errorfnameins; ?></span>
-            <input type="text" placeholder="Name of Institution" name="mnameins"
-                value="<?= isset($_POST['mnameins']) ? $_POST['mnameins'] : ''; ?>">
+                <label for="minstitution_address"><b>Address</b></label> <span class="membership-error">*
+                <?php echo $errorfinstitution_address; ?></span>
+            <textarea name="minstitution_address" rows="5" cols="33" class="textarea" maxlength="200"
+                value="<?= isset($_POST['minstitution_address']) ? $_POST['minstitution_address'] : ''; ?>" required> Address</textarea>
 
-            <label for="mplaceins"><b>Place of Institution</b></label> <span class="membership-error">
-                <?php echo $errorfplaceins; ?></span>
-            <input type="text" placeholder="Place of Institution" name="mplaceins"
-                value="<?= isset($_POST['mplaceins']) ? $_POST['mplaceins'] : ''; ?>">
-
-            <label for="mdesignation"><b>Designation</b></label> <span class="membership-error">
-                <?php echo $errorfdesignation; ?></span>
-            <input type="text" placeholder="Designation" name="mdesignation"
-                value="<?= isset($_POST['mdesignation']) ? $_POST['mdesignation'] : ''; ?>">
-
-            <label for="minterest"><b>Nature of Interest</b></label><span
-                class="membership-error">*<?php echo $errorfinterest; ?> </span>
+            <label for="minterest"><b>Nature of Interest</b></label><span class="membership-error">*<?php echo $errorfinterest; ?> </span>
             <textarea name="minterest" rows="5" cols="33" class="textarea"
                 value="<?= isset($_POST['minterest']) ? $_POST['minterest'] : ''; ?>"
                 required> Describe your Nature of Interest..</textarea>
@@ -118,46 +99,37 @@ require_once("functions.php");
             <input type="text" placeholder="Referral member's detail" name="mrefdet"
                 value="<?= isset($_POST['mrefdet']) ? $_POST['mrefdet'] : ''; ?>" required>
 
-            <label for="mem_id_type"><b>ID Proof type </b></label><span class="membership-error">*
-                <?php echo $errorf_id_type; ?></span>
-            <select name="mem_id_proof_type" value="<?= isset($_POST['mem_id_proof_type']) ? $_POST['mem_id_proof_type'] : ''; ?>" required>
-                        <option value="Aadhar Card">Aadhar Card</option>
-                        <option value="Driving License">Driving License</option>
-                        <option value="Voters ID">Voters ID</option>
-                    </select>
+            <label for="pan_no"><b>PAN Number </b></label><span class="membership-error">* <?php $errorf_pan_no; ?></span>
+            <input type="text" placeholder="PAN Number" name="pan_no"
+                value="<?= isset($_POST['pan_no']) ? $_POST['pan_no'] : ''; ?>" required>
 
-            <label for="mem_id_proof_no"><b>ID Proof number </b></label><span class="membership-error">* <?php $errorf_id_no; ?></span>
-            <input type="text" placeholder="Id Proof number" name="mem_id_proof_no"
-                value="<?= isset($_POST['mem_id_proof_no']) ? $_POST['mem_id_proof_no'] : ''; ?>" required>
+                <label for="reg_no"><b>Registration Certificate Number </b></label><span class="membership-error">* <?php $errorf_reg_no; ?></span>
+            <input type="text" placeholder="Registration Certificate" name="reg_no"
+                value="<?= isset($_POST['reg_no']) ? $_POST['reg_no'] : ''; ?>" required>
 
             <label for="mamount"><b>Amount Rs.</b></label><span class="membership-error">*
                 <?php echo $errorfamount; ?></span>
             <select name="mamount" value="<?= isset($_POST['mamount']) ? $_POST['mamount'] : ''; ?>" required>
-                <option value="2000">2,000/-</option>
+                <option value="10000">10,000/-</option>
             </select>    
 
-            <label for="mupload"><b>Photo upload (Passport size, less than 500kb) </b></label><span
-                class="membership-error">* <?php echo $errorfupload; ?></span>
-            <input type="file" accept="image/png, image/jpeg, image/jpg" name="mupload" id="mupload"
-                required>
-            <br><br><br>
-            <label for="place"><b>Place </b></label><span class="membership-error">* <?php $errorfplace; ?></span>
+            
+            <label for="mplace"><b>Place </b></label><span class="membership-error">* <?php $errorfplace; ?></span>
             <input type="text" placeholder="place" name="mplace"
                 value="<?= isset($_POST['mplace']) ? $_POST['mplace'] : ''; ?>" required>
-
-                <label for="date"><b>Date </b></label><span class="membership-error">* <?php $errorfdate; ?></span>
+            
+            <label for="date"><b>Date </b></label><span class="membership-error">* <?php $errorfdate; ?></span>
             <input type="text" name="mdate"
                 value="<?php echo date('Y-m-d'); ?>" required>
-            
+
             <div class="mform-btn-container">
                 <div class="mform-btn">
 
-                    <button type="submit" class="registerbtn" name="individual_submit">Register</button>
+                    <button type="submit" class="registerbtn" name="institution_submit">Register</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
-
 <!---------------HTML PAGE/Form DESIGN -END------------>
 <?php get_footer(); ?>

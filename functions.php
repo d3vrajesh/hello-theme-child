@@ -266,15 +266,10 @@ if(isset($_POST['individual_submit']))
 
 		$row_result = $wpdb->insert($nnhs_table_name, $data_array, $format=null);	
 	
-		wp_upload_bits($new_upload_file, null, file_get_contents($_FILES['mupload']['tmp_name'])); 		
-		
+		wp_upload_bits($new_upload_file, null, file_get_contents($_FILES['mupload']['tmp_name'])); 				
 	}
 	else {
-		
-		
-		$submission_failed = 'You application is not submitted, Check all the inputs.';
-		
 
+		$submission_failed = 'You application is not submitted, Check all the inputs.';
 	}
 }
-
