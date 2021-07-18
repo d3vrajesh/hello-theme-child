@@ -266,10 +266,256 @@ if(isset($_POST['individual_submit']))
 
 		$row_result = $wpdb->insert($nnhs_table_name, $data_array, $format=null);	
 	
-		wp_upload_bits($new_upload_file, null, file_get_contents($_FILES['mupload']['tmp_name'])); 				
+		wp_upload_bits($new_upload_file, null, file_get_contents($_FILES['mupload']['tmp_name'])); 		
+		
 	}
 	else {
-
+		
+		
 		$submission_failed = 'You application is not submitted, Check all the inputs.';
+		
+
 	}
 }
+
+//########################################################################################
+//##############    ####  ####         ######   ######   #######        ##################
+//##############  #  ###  ####  ##############    ##   ############  #####################
+//##############  ##  ##  ####       ###########      #############  #####################
+//##############  ###  #  ####  ##############    ##   ############  #####################
+//##############  ####    ####         ######   ######   ##########  #####################
+//########################################################################################
+
+
+//==================Membership form - Institution ============== 
+if(isset($_POST['institution_submit']))
+{
+
+ //------Variable mapping with html input fields using name --------------
+		$mem_type = $_POST['mem_type'];
+		$mname = $_POST["mname"]; 
+		$mdesignation = $_POST["mdesignation"];		
+		$mtelres = $_POST["mtelres"];
+		$mteloff = $_POST["mteloff"];
+		$mmob = $_POST["mmob"];
+		$memail = $_POST["memail"];
+		$mtype_institution = $_POST["mtype_institution"];
+		$minstitution_address = $_POST["minstitution_address"]
+		$minterest = $_POST["minterest"];
+		$mrefname = $_POST["mrefname"];
+		$mrefdet = $_POST["mrefdet"];
+		$id_proof_type = $_POST["id_proof_type"];
+		$id_proof_no = $_POST["id_proof_no"];
+		$mamount = $_POST["mamount"];
+		$mplace = $_POST["mplace"];
+		$mdate =  date('Y-m-d');
+ 
+	//-----------Form input Validation-----------	
+	$error = array();
+	
+	//-----Name - input text validation 
+	$fname = "/^[a-zA-Z\s]+$/";
+	if (!preg_match($fname, $mname)) {
+		$error['fname'] = "Invalid input";
+		$errorfname = "Invalid Input.";
+	}
+
+	//-----Designation - input text validation
+	$fdesignation = "/^[a-zA-Z\s]+$/";
+	if (!preg_match($fdesignation, $mdesignation)) {
+	$error['fdesignation'] = "Invalid input.";
+	$errorfdesignation = "Invalid input.";
+	}
+
+
+	//-----Mobile number - input number validation 
+	$fmob = "/^[0-9]+$/";
+	$fmobno = strlen($_POST["mmob"]);
+
+	if (!preg_match($fmob, $mmob))  {
+		$error['fmob'] = "Only numeric values are allowed";
+		$errorfmobno = "Only numeric values are allowed";
+	}
+	if ($fmobno != 10) {
+		$error['fmob'] = "Mobile number is not valid";
+		$errorfmobno = "Mobile number is not valid";
+	}
+
+	//-----Telephone residential - input number validation 
+	if (!preg_match($fmob, $mtelres)) {
+		$error['ftelres'] = "Only numeric value is allowed.";
+		$errorftelres = "Only numeric value is allowed.";
+	}
+	
+	//-----Telephone office - input number validation 
+	if (!preg_match($fmob, $mteloff)) {
+		$error['fteloffice'] = "Only numeric value is allowed.";
+		$errorfteloffice = "Only numeric value is allowed.";
+	}
+
+	//-----Email - input email validation 
+	if (is_email($memail) == false) {
+		$error['email'] = "Invalid e-mail.";
+		$errormail = "Invalid e-mail.";
+	}
+
+	//-----Institution Type - input text validation
+	$ftype_institution = "/^[a-zA-Z\s]+$/";
+	if (!preg_match($ftype_institution, $mtype_institution)) {
+		$error['ftype_institution'] = "Invalid input.";
+		$errorftype_institution = "Invalid input.";
+	}
+
+
+	//-----Institution Address - input text validation 
+
+	$finstitution_address = "/^[A-Za-z0-9\s\-\,]+$/";
+	if (!preg_match($finstitution_address, $minstitution_address)) {
+		$error['faddress'] = "Only numeric, alphabetic, comma, hypen are allowed.";
+		$errorfinstitution_address = "Only numeric, alphabetic, comma, hypen are allowed.";
+	}
+
+	//-----nature of interest - input text validation
+	$finterest = "/^[a-zA-Z\s\,\.]+$/";
+	if (!preg_match($finterest, $minterest)) {
+		$error['finterest'] = "Invalid input.";
+		$errorfinterest = "Invalid input.";
+	}
+	/*
+	//-----Name of institution - input text validation
+	$fnameins = "/^[a-zA-Z\s]+$/";
+	if (!preg_match($fnameins, $mnameins)) {
+		$error['fnameins'] = "Invalid input";
+		$errorfnameins = "Invalid input";
+	}
+
+	//-----Place of institution - input text validation
+	$fplaceins = "/^[a-zA-Z0-9\s\-\,\.]+$/";
+	if (!preg_match($fplaceins, $mplaceins)) {
+		$error['fplaceins'] = "Invalid input";
+		$errorfplaceins = "Invalid input";
+	}
+	 */
+	//-----Reference member name  - input text validation
+	$frefname = "/^[a-zA-Z\s]+$/";
+	if (!preg_match($frefname, $mrefname)) {
+		$error['frefnamet'] = "Invalid input.";
+		$errorfrefnamet = "Invalid input.";
+	}
+
+	//-----Reference member detail - input email/mobile number validation
+	 
+	//-----Reference Email validation  - input length validation
+	$frefdet = "/^[0-9]+$/";
+	$frefmobno = strlen($_POST["mrefdet"]);
+	 
+	if ((is_email($mrefdet) == false) && (!preg_match($frefdet, $mrefdet)))
+	{
+		$error['frefdet'] = "Not a valid input";
+		$errorfrefdet = "Not a valid input.";		
+	}
+	
+	if ((!preg_match($frefdet, $mrefdet) == false) && ($frefmobno != 10))
+	{
+		$error['frefdetmob'] = "Not a valid input";
+		$errorfrefdet = "Not a valid input.";		
+	 
+	} 
+
+	//-----Id_no - input text validation
+	if ($id_proof_type = "-select-")
+	{
+		$error['fid_proof_type'] = "Not a valid input";
+		$errorfid_proof_types = "Not a valid input.";
+	}
+	//-----Id_no - input text validation
+	$fid_proof_no = "/^[0-9]\/+$/";
+	if (!preg_match($fid_proof_no, $id_proof_no))
+	{
+		$error['fid_proof_no'] = "Not a valid input";
+		$errorfid_proof_no = "Not a valid input.";
+	}
+	//-----Place of application - input text validation
+	$fplace = "/^[a-zA-Z]+$/";
+	if (!preg_match($fplace, $mplace)) {
+		$error['fplace'] = "Not a valid input.";
+		$errorfplace = "not a valid input.";
+	} 
+	/*
+	 =======================================
+	//-----ID Proof Number  - input text validation
+	$f_id_proof_no = "/^[0-9]+$/";
+	$f_id_proof_length = strlen($_POST["mrefdet"]);
+	 
+	if ((empty($m_id_no) == false) && (!preg_match($f_id_proof_no, $m_id_no)))
+	{
+		$error['frefdet'] = "Not a valid input";
+		$errorfrefdet = "Not a valid input.";		
+	}
+	
+	if ((!preg_match($frefdet, $mrefdet) == false) && ($frefmobno != 10))
+	{
+		$error['frefdetmob'] = "Not a valid Aadhar Number";
+		$errorfrefdet = "Not a valid Aadhar Number.";		
+	 
+	} 
+
+	
+
+	//-----Upload file size validation (500Kb - Max)
+	if ($_FILES["mupload"]["size"] > 500000) {
+	$error['mupload'] = "File size is too  large. Maximum allowed file size is 500Kb";
+	$errorfupload = "File size is too  large. Maximum allowed file size is 500Kb";
+	} 
+
+	//-----Upload file format/extension validation (Allowed - jpeg, jpg, png) 
+
+	$file_jpeg = "jpeg";
+	$file_jpg = "jpg";
+	$file_png = "png";
+	$upload_file = wp_check_filetype($_FILES["mupload"]["name"]);
+	$upload_file_ext = $upload_file['ext'];
+
+	if (($upload_file_ext != $file_jpeg) && ($upload_file_ext != $file_jpg) && ($upload_file_ext != $file_png)) {
+		$error['mupload'] = "upload a png/jpeg/jpg file";
+		$errorfupload = "upload a png/jpeg/jpg file";
+		}	*/	
+
+//------Databse Access --------------
+	global $wpdb;
+	$nnhs_table_name = $wpdb->prefix . 'members_list';
+	//-----Save form data in Database  
+	if (count($error) == 0) {
+		$data_array = array(
+			'membership_type' => $mem_type,
+			'applicant_name' => $mname,
+			'designation' => $mdesignation,
+			'tel_res' => $mtelres,
+			'tel_off' => $mteloff,
+			'mob' => $mmob,
+			'email' => $memail,
+			'institution_type' => $mtype_institution,
+			'institution_address' => $maddress,
+			'interest' => $minterest,
+			'ref_name' => $mrefname,
+			'ref_detail' => $mrefdet,
+			'id_proof_type' => $m_id_type,
+			'id_proof_no' => $m_id_proof_no,			
+			'amount' => $mamount,
+			'place' => $mplace,
+			'app_date' => $mdate
+			
+			);
+
+		$row_result = $wpdb->insert($nnhs_table_name, $data_array, $format=null);	
+		
+	}
+	else {
+		
+		
+		$submission_failed = 'You application is not submitted, Check all the inputs.';
+		
+
+	}
+}
+
