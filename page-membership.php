@@ -55,9 +55,9 @@ require_once("functions.php");
                 value="<?= isset($_POST['mname']) ? $_POST['mname'] : ''; ?>" required>
 
             <label for="mdob"><b>Date of Birth</b></label> <span class="membership-error">*
-                <?php echo $errorfdob; ?></span>
+                <?php echo $errorfdob; ?></span> <br>
             <input type="date" placeholder="Date of Birth" name="mdob"
-                value="<?= isset($_POST['mdob']) ? $_POST['mdob'] : ''; ?>" required>
+                value="<?= isset($_POST['mdob']) ? $_POST['mdob'] : ''; ?>" required> <br>
 
             <label for="maddress"><b>Address</b></label> <span class="membership-error">*
                 <?php echo $errorfaddress; ?></span>
@@ -67,7 +67,7 @@ require_once("functions.php");
             <label for="mtelres"><b>Telephne-Residential</b></label><span class="membership-error">
                 <?php echo $errorftelres; ?></span>
             <input type="tel" placeholder="Telephone Residential" name="mtelres"
-                value="<?= isset($_POST['mtelres']) ? $_POST['mtelres'] : ''; ?>">
+                value="<?= isset($_POST['mtelres']) ? $_POST['mtelres'] : ''; ?>" >
 
             <label for="mteloff"><b>Telephne-Office</b></label><span class="membership-error">
                 <?php echo $errorfteloffice; ?></span>
@@ -121,6 +121,7 @@ require_once("functions.php");
             <label for="mem_id_type"><b>ID Proof type </b></label><span class="membership-error">*
                 <?php echo $errorf_id_type; ?></span>
             <select name="mem_id_proof_type" value="<?= isset($_POST['mem_id_proof_type']) ? $_POST['mem_id_proof_type'] : ''; ?>" required>
+            <option value="-Select-">-Select-</option>
                         <option value="Aadhar Card">Aadhar Card</option>
                         <option value="Driving License">Driving License</option>
                         <option value="Voters ID">Voters ID</option>
@@ -136,7 +137,7 @@ require_once("functions.php");
                 <option value="2000">2,000/-</option>
             </select>    
 
-            <label for="mupload"><b>Photo upload (Passport size, less than 500kb) </b></label><span
+            <label for="mupload"><b>Photo upload (Passport size, less than 100kb) </b></label><span
                 class="membership-error">* <?php echo $errorfupload; ?></span>
             <input type="file" accept="image/png, image/jpeg, image/jpg" name="mupload" id="mupload"
                 required>

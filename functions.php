@@ -59,7 +59,7 @@ if(isset($_POST['individual_submit']))
 		$mrefname = $_POST["mrefname"];
 		$mrefdet = $_POST["mrefdet"];
 		$m_id_type = $_POST["mem_id_proof_type"];
-		$m_id_no = $_POST["mem_id_proof_no"];
+		$m_id_proof_no = $_POST["mem_id_proof_no"];
 		$mamount = $_POST["mamount"];
 		$mplace = $_POST["mplace"];
 		$mdate =  date('Y-m-d');
@@ -172,24 +172,20 @@ if(isset($_POST['individual_submit']))
 		$errorfrefdet = "Not a valid input.";		
 	 
 	} 
-	/*
-	 =======================================
-	//-----ID Proof Number  - input text validation
-	$f_id_proof_no = "/^[0-9]+$/";
-	$f_id_proof_length = strlen($_POST["mrefdet"]);
-	 
-	if ((empty($m_id_no) == false) && (!preg_match($f_id_proof_no, $m_id_no)))
+	//-----Id_proof_type - input text validation
+	$f_id_proof_type = "-Select-";
+	if ($id_proof_type = $f_id_proof_type)
 	{
-		$error['frefdet'] = "Not a valid input";
-		$errorfrefdet = "Not a valid input.";		
+		$error['fid_proof_type'] = "Not a valid input";
+		$errorfid_proof_types = "Not a valid input.";
 	}
-	
-	if ((!preg_match($frefdet, $mrefdet) == false) && ($frefmobno != 10))
+	//-----Id_no - input text validation
+	$fid_proof_no = "/^[0-9]\/+$/";
+	if (!preg_match($fid_proof_no, $id_proof_no))
 	{
-		$error['frefdetmob'] = "Not a valid Aadhar Number";
-		$errorfrefdet = "Not a valid Aadhar Number.";		
-	 
-	} */
+		$error['fid_proof_no'] = "Not a valid input";
+		$errorfid_proof_no = "Not a valid input.";
+	}
 
 	//-----Place of application - input text validation
 	$fplace = "/^[a-zA-Z]+$/";
@@ -198,10 +194,10 @@ if(isset($_POST['individual_submit']))
 		$errorfplace = "not a valid input.";
 	} 
 
-	//-----Upload file size validation (500Kb - Max)
-	if ($_FILES["mupload"]["size"] > 500000) {
-	$error['mupload'] = "File size is too  large. Maximum allowed file size is 500Kb";
-	$errorfupload = "File size is too  large. Maximum allowed file size is 500Kb";
+	//-----Upload file size validation (100Kb - Max)
+	if ($_FILES["mupload"]["size"] > 100000) {
+	$error['mupload'] = "File size is too  large. Maximum allowed file size is 100Kb";
+	$errorfupload = "File size is too  large. Maximum allowed file size is 100Kb";
 	} 
 
 	//-----Upload file format/extension validation (Allowed - jpeg, jpg, png) 
@@ -226,12 +222,14 @@ if(isset($_POST['individual_submit']))
 	//$rename_format = 'Membership'.date('Ymd').$random_no;
 	$new_upload_file = $rename_format .".".$upload_file_extension;
 
-
-
 	//-----Get file upload URL   
 	$upload_dir = wp_upload_dir();
 	$mupload_url = $upload_dir['url']; 
 	$mupload = $mupload_url . "/" . $new_upload_file;
+	
+	//---Passing default values to the default values 
+	$default_app_status = "Pending";
+	$not_applicable = "Not applicable";
 
 //------Databse Access --------------
 	global $wpdb;
@@ -239,6 +237,7 @@ if(isset($_POST['individual_submit']))
 	//-----Save form data in Database  
 	if (count($error) == 0) {
 		$data_array = array(
+			'app_ststus' => $default_app_status,
 			'membership_type' => $mem_type,
 			'applicant_name' => $mname,
 			'dob' => $mdob,
@@ -252,11 +251,13 @@ if(isset($_POST['individual_submit']))
 			'place_ins' => $mplaceins,
 			'interest' => $minterest,
 			'designation' => $mdesignation,
+			'institution_type' => $not_applicable,
+			'institution_address' =>$not_applicable,
 			'amount' => $mamount,
 			'ref_name' => $mrefname,
 			'ref_detail' => $mrefdet,
 			'id_proof_type' => $m_id_type,
-			'id_proof_no' => $m_id_no,
+			'id_proof_no' => $m_id_proof_no,
 			'amount' => $mamount,
 			'upload' => $mupload,
 			'place' => $mplace,
@@ -300,7 +301,7 @@ if(isset($_POST['institution_submit']))
 		$mmob = $_POST["mmob"];
 		$memail = $_POST["memail"];
 		$mtype_institution = $_POST["mtype_institution"];
-		$minstitution_address = $_POST["minstitution_address"]
+		$minstitution_address = $_POST["minstitution_address"];
 		$minterest = $_POST["minterest"];
 		$mrefname = $_POST["mrefname"];
 		$mrefdet = $_POST["mrefdet"];
@@ -381,21 +382,7 @@ if(isset($_POST['institution_submit']))
 		$error['finterest'] = "Invalid input.";
 		$errorfinterest = "Invalid input.";
 	}
-	/*
-	//-----Name of institution - input text validation
-	$fnameins = "/^[a-zA-Z\s]+$/";
-	if (!preg_match($fnameins, $mnameins)) {
-		$error['fnameins'] = "Invalid input";
-		$errorfnameins = "Invalid input";
-	}
 
-	//-----Place of institution - input text validation
-	$fplaceins = "/^[a-zA-Z0-9\s\-\,\.]+$/";
-	if (!preg_match($fplaceins, $mplaceins)) {
-		$error['fplaceins'] = "Invalid input";
-		$errorfplaceins = "Invalid input";
-	}
-	 */
 	//-----Reference member name  - input text validation
 	$frefname = "/^[a-zA-Z\s]+$/";
 	if (!preg_match($frefname, $mrefname)) {
@@ -422,13 +409,14 @@ if(isset($_POST['institution_submit']))
 	 
 	} 
 
-	//-----Id_no - input text validation
-	if ($id_proof_type = "-select-")
+	//-----Id_Proof_Type - input text validation
+	$f_id_proof_type = "-Select-";
+	if ($id_proof_type = $f_id_proof_type)
 	{
 		$error['fid_proof_type'] = "Not a valid input";
 		$errorfid_proof_types = "Not a valid input.";
 	}
-	//-----Id_no - input text validation
+	//-----Id_Proof_no - input text validation
 	$fid_proof_no = "/^[0-9]\/+$/";
 	if (!preg_match($fid_proof_no, $id_proof_no))
 	{
@@ -441,45 +429,9 @@ if(isset($_POST['institution_submit']))
 		$error['fplace'] = "Not a valid input.";
 		$errorfplace = "not a valid input.";
 	} 
-	/*
-	 =======================================
-	//-----ID Proof Number  - input text validation
-	$f_id_proof_no = "/^[0-9]+$/";
-	$f_id_proof_length = strlen($_POST["mrefdet"]);
-	 
-	if ((empty($m_id_no) == false) && (!preg_match($f_id_proof_no, $m_id_no)))
-	{
-		$error['frefdet'] = "Not a valid input";
-		$errorfrefdet = "Not a valid input.";		
-	}
-	
-	if ((!preg_match($frefdet, $mrefdet) == false) && ($frefmobno != 10))
-	{
-		$error['frefdetmob'] = "Not a valid Aadhar Number";
-		$errorfrefdet = "Not a valid Aadhar Number.";		
-	 
-	} 
-
-	
-
-	//-----Upload file size validation (500Kb - Max)
-	if ($_FILES["mupload"]["size"] > 500000) {
-	$error['mupload'] = "File size is too  large. Maximum allowed file size is 500Kb";
-	$errorfupload = "File size is too  large. Maximum allowed file size is 500Kb";
-	} 
-
-	//-----Upload file format/extension validation (Allowed - jpeg, jpg, png) 
-
-	$file_jpeg = "jpeg";
-	$file_jpg = "jpg";
-	$file_png = "png";
-	$upload_file = wp_check_filetype($_FILES["mupload"]["name"]);
-	$upload_file_ext = $upload_file['ext'];
-
-	if (($upload_file_ext != $file_jpeg) && ($upload_file_ext != $file_jpg) && ($upload_file_ext != $file_png)) {
-		$error['mupload'] = "upload a png/jpeg/jpg file";
-		$errorfupload = "upload a png/jpeg/jpg file";
-		}	*/	
+	//---Passing default values to the default values 
+	$default_app_status = "Pending";
+	$not_applicable = "Not applicable";
 
 //------Databse Access --------------
 	global $wpdb;
@@ -487,16 +439,22 @@ if(isset($_POST['institution_submit']))
 	//-----Save form data in Database  
 	if (count($error) == 0) {
 		$data_array = array(
+			'app_ststus' => $default_app_status,
 			'membership_type' => $mem_type,
 			'applicant_name' => $mname,
-			'designation' => $mdesignation,
+			'dob' => $not_applicable,
+			'contact_address' => $not_applicable,
 			'tel_res' => $mtelres,
 			'tel_off' => $mteloff,
 			'mob' => $mmob,
 			'email' => $memail,
+			'profession' => $mprofession,
+			'name_ins' => $not_applicable,
+			'place_ins' => $not_applicable,
+			'interest' => $minterest,
+			'designation' => $mdesignation,
 			'institution_type' => $mtype_institution,
 			'institution_address' => $maddress,
-			'interest' => $minterest,
 			'ref_name' => $mrefname,
 			'ref_detail' => $mrefdet,
 			'id_proof_type' => $m_id_type,
@@ -515,6 +473,9 @@ if(isset($_POST['institution_submit']))
 		
 		$submission_failed = 'You application is not submitted, Check all the inputs.';
 		
+
+
+
 
 	}
 }

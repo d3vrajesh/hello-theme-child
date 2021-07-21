@@ -99,14 +99,18 @@ require_once("functions.php");
             <input type="text" placeholder="Referral member's detail" name="mrefdet"
                 value="<?= isset($_POST['mrefdet']) ? $_POST['mrefdet'] : ''; ?>" required>
 
-            <label for="pan_no"><b>PAN Number </b></label><span class="membership-error">* <?php $errorf_pan_no; ?></span>
-            <input type="text" placeholder="PAN Number" name="pan_no"
-                value="<?= isset($_POST['pan_no']) ? $_POST['pan_no'] : ''; ?>" required>
+                <label for="id_proof_type"><b>ID Proof Type</b></label> <span class="membership-error">* <?php echo $errorfid_proof_type; ?></span>
+            <select name="id_proof_type" value="<?= isset($_POST['id_proof_type']) ? $_POST['id_proof_type'] : ''; ?>" required>
+                        <option value="-Select-">-Select-</option> 
+                        <option value="PAN Card">PAN Card</option>  
+                        <option value="Registration Certificate">Registration Certificate</option> 
+                        </select>
+            
+            <label for="id_proof_no"><b>PAN Number </b></label><span class="membership-error">* <?php $errorfid_proof_no; ?></span>
+            <input type="text" placeholder="ID Proof Number" name="id_proof_no"
+                value="<?= isset($_POST['id_proof_no']) ? $_POST['id_proof_no'] : ''; ?>" required>
 
-                <label for="reg_no"><b>Registration Certificate Number </b></label><span class="membership-error">* <?php $errorf_reg_no; ?></span>
-            <input type="text" placeholder="Registration Certificate" name="reg_no"
-                value="<?= isset($_POST['reg_no']) ? $_POST['reg_no'] : ''; ?>" required>
-
+                 
             <label for="mamount"><b>Amount Rs.</b></label><span class="membership-error">*
                 <?php echo $errorfamount; ?></span>
             <select name="mamount" value="<?= isset($_POST['mamount']) ? $_POST['mamount'] : ''; ?>" required>
