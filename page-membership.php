@@ -27,11 +27,11 @@ require_once("functions.php");
 
             <?php 
                 if ($row_result == 1) {
-                    $mail_subject = "New member" . $mname . "has registered for NNHS membership";
-                    wp_mail('rajeshr@keystone-foundation.org', $mail_subject, $message);
+                  //  $mail_subject = "New member" . $mname . "has registered for NNHS membership";
+                  //  wp_mail('rajeshr@keystone-foundation.org', $mail_subject, $message);
 
-                    wp_redirect('http://localhost/nnhs/success/');                  
-                      
+                  //  wp_redirect('http://localhost/nnhs/success/');                  
+                      echo "successs";
                 }       
                 
                 else {
@@ -109,7 +109,7 @@ require_once("functions.php");
                 required> Describe your Nature of Interest..</textarea>
 
             <label for="mrefname"><b>Referred by NNHS member (Please mention Name) </b></label><span
-                class="membership-error">* <?php echo $errorfrefnamet; ?></span>
+                class="membership-error">* <?php echo $errorfrefname; ?></span>
             <input type="text" placeholder="Referral member's name" name="mrefname"
                 value="<?= isset($_POST['mrefname']) ? $_POST['mrefname'] : ''; ?>" required>
 
@@ -117,21 +117,20 @@ require_once("functions.php");
                 <?php echo $errorfrefdet; ?></span>
             <input type="text" placeholder="Referral member's detail" name="mrefdet"
                 value="<?= isset($_POST['mrefdet']) ? $_POST['mrefdet'] : ''; ?>" required>
-
-            <label for="mem_id_type"><b>ID Proof type </b></label><span class="membership-error">*
-                <?php echo $errorf_id_type; ?></span>
+            <label for="mem_id_proof_type"><b>ID Proof type </b></label><span class="membership-error">*
+                <?php echo $errorfid_proof_type; ?></span>
             <select name="mem_id_proof_type" value="<?= isset($_POST['mem_id_proof_type']) ? $_POST['mem_id_proof_type'] : ''; ?>" required>
-            <option value="-Select-">-Select-</option>
+                        <option value="-Select-">-Select-</option>
                         <option value="Aadhar Card">Aadhar Card</option>
                         <option value="Driving License">Driving License</option>
                         <option value="Voters ID">Voters ID</option>
                     </select>
 
-            <label for="mem_id_proof_no"><b>ID Proof number </b></label><span class="membership-error">* <?php $errorf_id_no; ?></span>
+            <label for="mem_id_proof_no"><b>ID Proof number </b></label><span class="membership-error">* <?php echo $errorfid_proof_no; ?></span>
             <input type="text" placeholder="Id Proof number" name="mem_id_proof_no"
                 value="<?= isset($_POST['mem_id_proof_no']) ? $_POST['mem_id_proof_no'] : ''; ?>" required>
 
-            <label for="mamount"><b>Amount Rs.</b></label><span class="membership-error">*
+                <label for="mamount"><b>Amount Rs.</b></label><span class="membership-error">*
                 <?php echo $errorfamount; ?></span>
             <select name="mamount" value="<?= isset($_POST['mamount']) ? $_POST['mamount'] : ''; ?>" required>
                 <option value="2000">2,000/-</option>
@@ -142,13 +141,15 @@ require_once("functions.php");
             <input type="file" accept="image/png, image/jpeg, image/jpg" name="mupload" id="mupload"
                 required>
             <br><br><br>
-            <label for="place"><b>Place </b></label><span class="membership-error">* <?php $errorfplace; ?></span>
+            <label for="mplace"><b>Place </b></label><span class="membership-error">* <?php echo $errorfplace; ?></span>
             <input type="text" placeholder="place" name="mplace"
                 value="<?= isset($_POST['mplace']) ? $_POST['mplace'] : ''; ?>" required>
 
-                <label for="date"><b>Date </b></label><span class="membership-error">* <?php $errorfdate; ?></span>
+                <label for="date"><b>Date </b></label><span class="membership-error">* <?php echo $errorfdate; ?></span>
             <input type="text" name="mdate"
                 value="<?php echo date('Y-m-d'); ?>" required>
+
+           
             
             <div class="mform-btn-container">
                 <div class="mform-btn">
