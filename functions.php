@@ -153,7 +153,7 @@ if(isset($_POST['individual_submit']))
 	if (!preg_match($frefname, $mrefname)) {
 		$error['frefnamet'] = "Invalid input.";
 		$errorfrefname = "Invalid input.";
-	}
+	}                if ($row_result == 1) {
 
 	//-----Reference member detail - input email/mobile number validation
 	 
@@ -213,8 +213,7 @@ if(isset($_POST['individual_submit']))
 	if (($upload_file_ext != $file_jpeg) && ($upload_file_ext != $file_jpg) && ($upload_file_ext != $file_png)) {
 		$error['mupload'] = "upload a png/jpeg/jpg file";
 		$errorfupload = "upload a png/jpeg/jpg file";
-		}
-		
+		}		
 	
 	//----- Rename file on upload
  	
@@ -259,7 +258,6 @@ if(isset($_POST['individual_submit']))
 			'designation' => $mdesignation, 
 			'institution_type' => $not_applicable,
 			'institution_address' =>$not_applicable,
-			'amount' => $mamount,
 			'pay_status' => $none,
 			'transaction_type' => $none,
 			'transaction_id' => $none,
@@ -284,7 +282,6 @@ if(isset($_POST['individual_submit']))
 		
 		$submission_failed = 'You application is not submitted, Check all the inputs.';
 		
-
 	}
 }
 
@@ -304,13 +301,16 @@ if(isset($_POST['institution_submit']))
 		$mteloff = $_POST["mteloff"];
 		$mmob = $_POST["mmob"];
 		$memail = $_POST["memail"];
+		$mnameins = $_POST["mnameins"];
 		$mtype_institution = $_POST["mtype_institution"];
 		$minstitution_address = $_POST["minstitution_address"];
 		$minterest = $_POST["minterest"];
 		$mrefname = $_POST["mrefname"];
 		$mrefdet = $_POST["mrefdet"];
+		/*
 		$id_proof_type = $_POST["id_proof_type"];
 		$id_proof_no = $_POST["id_proof_no"];
+		*/
 		$mamount = $_POST["mamount"];
 		$mplace = $_POST["mplace"];
 		$mdate =  date('Y-m-d');
@@ -331,7 +331,6 @@ if(isset($_POST['institution_submit']))
 	$error['fdesignation'] = "Invalid input.";
 	$errorfdesignation = "Invalid input.";
 	}
-
 
 	//-----Mobile number - input number validation 
 	$fmob = "/^[0-9]+$/";
@@ -364,13 +363,19 @@ if(isset($_POST['institution_submit']))
 		$errorfemail = "Invalid e-mail.";
 	}
 
+	//-----Name of institution - input text validation
+	$fnameins = "/^[a-zA-Z\s]+$/";
+	if (!preg_match($fnameins, $mnameins)) {
+		$error['fnameins'] = "Invalid input";
+		$errorfnameins = "Invalid input";
+	}
+
 	//-----Institution Type - input text validation
 	$ftype_institution = "/^[a-zA-Z\s]+$/";
 	if (!preg_match($ftype_institution, $mtype_institution)) {
 		$error['ftype_institution'] = "Invalid input.";
 		$errorftype_institution = "Invalid input.";
 	}
-
 
 	//-----Institution Address - input text validation 
 
@@ -412,7 +417,7 @@ if(isset($_POST['institution_submit']))
 		$errorfrefdet = "Not a valid input.";		
 	 
 	} 
-
+/*
 	//-----Id_Proof_Type - input text validation
 	$f_id_proof_type = "-Select-";
 	if ($id_proof_type = $f_id_proof_type)
@@ -427,6 +432,7 @@ if(isset($_POST['institution_submit']))
 		$error['fid_proof_no'] = "Not a valid input";
 		$errorfid_proof_no = "Not a valid input.";
 	}
+*/	
 	//-----Place of application - input text validation
 	$fplace = "/^[a-zA-Z]+$/";
 	if (!preg_match($fplace, $mplace)) {
@@ -436,6 +442,7 @@ if(isset($_POST['institution_submit']))
 	//---Passing default values to the default values 
 	$default_app_status = "Pending";
 	$not_applicable = "Not applicable";
+	$none = "None";
 
 //------Databse Access --------------
 	global $wpdb;
@@ -454,16 +461,21 @@ if(isset($_POST['institution_submit']))
 			'mob' => $mmob,
 			'email' => $memail,
 			'profession' => $mprofession,
-			'name_ins' => $not_applicable,
+			'name_ins' => $mnameins,
 			'place_ins' => $not_applicable,
 			'interest' => $minterest,
 			'designation' => $mdesignation,
 			'institution_type' => $mtype_institution,
 			'institution_address' => $maddress,
+			'pay_status' => $none,
+			'transaction_type' => $none,
+			'transaction_id' => $none,
 			'ref_name' => $mrefname,
 			'ref_detail' => $mrefdet,
+			/*
 			'id_proof_type' => $m_id_type,
-			'id_proof_no' => $m_id_proof_no,			
+			'id_proof_no' => $m_id_proof_no,	
+			*/		
 			'amount' => $mamount,
 			'place' => $mplace,
 			'app_date' => $mdate
@@ -473,15 +485,11 @@ if(isset($_POST['institution_submit']))
 		$row_result = $wpdb->insert($nnhs_table_name, $data_array, $format=null);	
 		
 	}
-	else {
-		
+	else {	
 		
 		$submission_failed = 'You application is not submitted, Check all the inputs.';
-		
-
-
-
 
 	}
+}
 }
 

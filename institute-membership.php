@@ -27,11 +27,11 @@ require_once("functions.php");
 
             <?php 
                 if ($row_result == 1) {
-                    $mail_subject = "New member" . $mname . "has registered for NNHS membership";
-                    wp_mail('rajeshr@keystone-foundation.org', $mail_subject, $message);
+                                     //  $mail_subject = "New member" . $mname . "has registered for NNHS membership";
+                  //  wp_mail('rajeshr@keystone-foundation.org', $mail_subject, $message);
 
-                    wp_redirect('http://localhost/nnhs/success/');                  
-                      
+                  //  wp_redirect('http://localhost/nnhs/success/');                  
+                  echo "successs";
                 }       
                 
                 else {
@@ -46,7 +46,7 @@ require_once("functions.php");
 
             <label for="mem_type"><b>Membership Type</b></label> <span class="membership-error">* <?php echo $errorf_mem_type; ?></span>
             <select name="mem_type" value="<?= isset($_POST['mem_type']) ? $_POST['mem_type'] : ''; ?>" required>
-                        <option value="Individual">Individual</option>                    </select>
+                        <option value="Institution">Institution</option>                    </select>
 
             <label for="mname"><b>Applicant Name</b></label> <span class="membership-error">* <?php echo $errorfname; ?></span>
             <input type="text" placeholder="Name" name="mname" maxlength="20"
@@ -73,6 +73,11 @@ require_once("functions.php");
             <label for="memail"><b>Email</b></label><span class="membership-error">* <?php echo $errorfemail; ?></span>
             <input type="text" placeholder="Email" name="memail"
                 value="<?= isset($_POST['memail']) ? $_POST['memail'] : ''; ?>" required>
+            
+                <label for="mnameins"><b>Name of Institution</b></label> <span class="membership-error">
+                <?php echo $errorfnameins; ?></span>
+            <input type="text" placeholder="Name of Institution" name="mnameins"
+                value="<?= isset($_POST['mnameins']) ? $_POST['mnameins'] : ''; ?>" required>
 
                 <label for="mtype_institution"><b>Type of Institution</b></label><span class="membership-error">*
                 <?php echo $errorftype_institution; ?></span>
@@ -99,16 +104,8 @@ require_once("functions.php");
             <input type="text" placeholder="Referral member's detail" name="mrefdet"
                 value="<?= isset($_POST['mrefdet']) ? $_POST['mrefdet'] : ''; ?>" required>
 
-                <label for="id_proof_type"><b>ID Proof Type</b></label> <span class="membership-error">* <?php echo $errorfid_proof_type; ?></span>
-            <select name="id_proof_type" value="<?= isset($_POST['id_proof_type']) ? $_POST['id_proof_type'] : ''; ?>" required>
-                        <option value="-Select-">-Select-</option> 
-                        <option value="PAN Card">PAN Card</option>  
-                        <option value="Registration Certificate">Registration Certificate</option> 
-                        </select>
-            
-            <label for="id_proof_no"><b>PAN Number </b></label><span class="membership-error">* <?php $errorfid_proof_no; ?></span>
-            <input type="text" placeholder="ID Proof Number" name="id_proof_no"
-                value="<?= isset($_POST['id_proof_no']) ? $_POST['id_proof_no'] : ''; ?>" required>
+
+
 
                  
             <label for="mamount"><b>Amount Rs.</b></label><span class="membership-error">*
