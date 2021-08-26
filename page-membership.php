@@ -91,7 +91,7 @@ require_once("functions.php");
                 <?php echo $errorfnameins; ?></span>
             <input type="text" placeholder="Name of Institution" name="mnameins"
                 value="<?= isset($_POST['mnameins']) ? $_POST['mnameins'] : ''; ?>">
-
+            
             <label for="mplaceins"><b>Place of Institution</b></label> <span class="membership-error">
                 <?php echo $errorfplaceins; ?></span>
             <input type="text" placeholder="Place of Institution" name="mplaceins"

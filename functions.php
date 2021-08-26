@@ -153,7 +153,7 @@ if(isset($_POST['individual_submit']))
 	if (!preg_match($frefname, $mrefname)) {
 		$error['frefnamet'] = "Invalid input.";
 		$errorfrefname = "Invalid input.";
-	}                if ($row_result == 1) {
+	}               
 
 	//-----Reference member detail - input email/mobile number validation
 	 
@@ -253,17 +253,16 @@ if(isset($_POST['individual_submit']))
 			'email' => $memail,
 			'profession' => $mprofession,
 			'name_ins' => $mnameins,
+			'type_institution' => $not_applicable,
 			'place_ins' => $mplaceins,
 			'interest' => $minterest,
-			'designation' => $mdesignation, 
-			'institution_type' => $not_applicable,
-			'institution_address' =>$not_applicable,
+			'designation' => $mdesignation, 	
 			'pay_status' => $none,
 			'transaction_type' => $none,
 			'transaction_id' => $none,
 			'ref_name' => $mrefname,
 			'ref_detail' => $mrefdet,  
-			'id_proof_type' => $m_id_type,
+			'id_proof_type' => $m_id_proof_type,
 			'id_proof_no' => $m_id_proof_no, 
 			'amount' => $mamount,
 			'upload' => $mupload,
@@ -300,20 +299,20 @@ if(isset($_POST['institution_submit']))
 		$mtelres = $_POST["mtelres"];
 		$mteloff = $_POST["mteloff"];
 		$mmob = $_POST["mmob"];
-		$memail = $_POST["memail"];
+		$memail = $_POST["memail"]; /*
 		$mnameins = $_POST["mnameins"];
 		$mtype_institution = $_POST["mtype_institution"];
 		$minstitution_address = $_POST["minstitution_address"];
 		$minterest = $_POST["minterest"];
 		$mrefname = $_POST["mrefname"];
 		$mrefdet = $_POST["mrefdet"];
-		/*
+		
 		$id_proof_type = $_POST["id_proof_type"];
 		$id_proof_no = $_POST["id_proof_no"];
-		*/
+		
 		$mamount = $_POST["mamount"];
 		$mplace = $_POST["mplace"];
-		$mdate =  date('Y-m-d');
+		$mdate =  date('Y-m-d');*/
  
 	//-----------Form input Validation-----------	
 	$error = array();
@@ -362,7 +361,7 @@ if(isset($_POST['institution_submit']))
 		$error['email'] = "Invalid e-mail.";
 		$errorfemail = "Invalid e-mail.";
 	}
-
+/*
 	//-----Name of institution - input text validation
 	$fnameins = "/^[a-zA-Z\s]+$/";
 	if (!preg_match($fnameins, $mnameins)) {
@@ -417,7 +416,7 @@ if(isset($_POST['institution_submit']))
 		$errorfrefdet = "Not a valid input.";		
 	 
 	} 
-/*
+ 
 	//-----Id_Proof_Type - input text validation
 	$f_id_proof_type = "-Select-";
 	if ($id_proof_type = $f_id_proof_type)
@@ -432,13 +431,13 @@ if(isset($_POST['institution_submit']))
 		$error['fid_proof_no'] = "Not a valid input";
 		$errorfid_proof_no = "Not a valid input.";
 	}
-*/	
+ 	
 	//-----Place of application - input text validation
 	$fplace = "/^[a-zA-Z]+$/";
 	if (!preg_match($fplace, $mplace)) {
 		$error['fplace'] = "Not a valid input.";
 		$errorfplace = "not a valid input.";
-	} 
+	} */
 	//---Passing default values to the default values 
 	$default_app_status = "Pending";
 	$not_applicable = "Not applicable";
@@ -459,7 +458,7 @@ if(isset($_POST['institution_submit']))
 			'tel_res' => $mtelres,
 			'tel_off' => $mteloff,
 			'mob' => $mmob,
-			'email' => $memail,
+			'email' => $memail /*,
 			'profession' => $mprofession,
 			'name_ins' => $mnameins,
 			'place_ins' => $not_applicable,
@@ -472,14 +471,14 @@ if(isset($_POST['institution_submit']))
 			'transaction_id' => $none,
 			'ref_name' => $mrefname,
 			'ref_detail' => $mrefdet,
-			/*
-			'id_proof_type' => $m_id_type,
+			 
+			'id_proof_type' => $m_id_proof_type,
 			'id_proof_no' => $m_id_proof_no,	
-			*/		
+					
 			'amount' => $mamount,
 			'place' => $mplace,
 			'app_date' => $mdate
-			
+			*/
 			);
 
 		$row_result = $wpdb->insert($nnhs_table_name, $data_array, $format=null);	
@@ -491,5 +490,5 @@ if(isset($_POST['institution_submit']))
 
 	}
 }
-}
+
 
