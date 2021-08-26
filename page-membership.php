@@ -30,8 +30,8 @@ require_once("functions.php");
                   //  $mail_subject = "New member" . $mname . "has registered for NNHS membership";
                   //  wp_mail('rajeshr@keystone-foundation.org', $mail_subject, $message);
 
-                  //  wp_redirect('http://localhost/nnhs/success/');                  
-                      echo "successs";
+                    wp_redirect('https://nnhs.in/thank-you/');                  
+                       
                 }       
                 
                 else {
@@ -41,14 +41,15 @@ require_once("functions.php");
                     }
             ?>
 
-<!----Match form input fields with membership plugin and adatabse columns --> 
+            <!----Match form input fields with membership plugin and adatabse columns -->
             <p><span class="membership-error">Fields marked with * are mandatory.</span></p>
 
-            <label for="mem_type"><b>Membership Type</b></label> <span class="membership-error">* <?php echo $errorf_mem_type; ?></span>
+            <label for="mem_type"><b>Membership Type</b></label> <span class="membership-error">*
+                <?php echo $errorf_mem_type; ?></span>
             <select name="mem_type" value="<?= isset($_POST['mem_type']) ? $_POST['mem_type'] : ''; ?>" required>
-                        <option value="Individual">Individual</option>
-                        
-                    </select>
+                <option value="Individual">Individual</option>
+
+            </select>
 
             <label for="mname"><b>Name</b></label> <span class="membership-error">* <?php echo $errorfname; ?></span>
             <input type="text" placeholder="Name" name="mname" maxlength="20"
@@ -67,7 +68,7 @@ require_once("functions.php");
             <label for="mtelres"><b>Telephne-Residential</b></label><span class="membership-error">
                 <?php echo $errorftelres; ?></span>
             <input type="tel" placeholder="Telephone Residential" name="mtelres"
-                value="<?= isset($_POST['mtelres']) ? $_POST['mtelres'] : ''; ?>" >
+                value="<?= isset($_POST['mtelres']) ? $_POST['mtelres'] : ''; ?>">
 
             <label for="mteloff"><b>Telephne-Office</b></label><span class="membership-error">
                 <?php echo $errorfteloffice; ?></span>
@@ -119,38 +120,38 @@ require_once("functions.php");
                 value="<?= isset($_POST['mrefdet']) ? $_POST['mrefdet'] : ''; ?>" required>
             <label for="mem_id_proof_type"><b>ID Proof type </b></label><span class="membership-error">*
                 <?php echo $errorfid_proof_type; ?></span>
-            <select name="mem_id_proof_type" value="<?= isset($_POST['mem_id_proof_type']) ? $_POST['mem_id_proof_type'] : ''; ?>" required>
-                        <option value="-Select-">-Select-</option>
-                        <option value="Aadhar Card">Aadhar Card</option>
-                        <option value="Driving License">Driving License</option>
-                        <option value="Voters ID">Voters ID</option>
-                    </select>
+            <select name="mem_id_proof_type"
+                value="<?= isset($_POST['mem_id_proof_type']) ? $_POST['mem_id_proof_type'] : ''; ?>" required>
+                <option value="-Select-">-Select-</option>
+                <option value="Aadhar Card">Aadhar Card</option>
+                <option value="Driving License">Driving License</option>
+                <option value="Voters ID">Voters ID</option>
+            </select>
 
-            <label for="mem_id_proof_no"><b>ID Proof number </b></label><span class="membership-error">* <?php echo $errorfid_proof_no; ?></span>
+            <label for="mem_id_proof_no"><b>ID Proof number </b></label><span class="membership-error">*
+                <?php echo $errorfid_proof_no; ?></span>
             <input type="text" placeholder="Id Proof number" name="mem_id_proof_no"
                 value="<?= isset($_POST['mem_id_proof_no']) ? $_POST['mem_id_proof_no'] : ''; ?>" required>
 
-                <label for="mamount"><b>Amount Rs.</b></label><span class="membership-error">*
+            <label for="mamount"><b>Amount Rs.</b></label><span class="membership-error">*
                 <?php echo $errorfamount; ?></span>
             <select name="mamount" value="<?= isset($_POST['mamount']) ? $_POST['mamount'] : ''; ?>" required>
                 <option value="2000">2,000/-</option>
-            </select>    
+            </select>
 
             <label for="mupload"><b>Photo upload (Passport size, less than 100kb) </b></label><span
                 class="membership-error">* <?php echo $errorfupload; ?></span>
-            <input type="file" accept="image/png, image/jpeg, image/jpg" name="mupload" id="mupload"
-                required>
+            <input type="file" accept="image/png, image/jpeg, image/jpg" name="mupload" id="mupload" required>
             <br><br><br>
             <label for="mplace"><b>Place </b></label><span class="membership-error">* <?php echo $errorfplace; ?></span>
             <input type="text" placeholder="place" name="mplace"
                 value="<?= isset($_POST['mplace']) ? $_POST['mplace'] : ''; ?>" required>
 
-                <label for="date"><b>Date </b></label><span class="membership-error">* <?php echo $errorfdate; ?></span>
-            <input type="text" name="mdate"
-                value="<?php echo date('Y-m-d'); ?>" required>
+            <label for="date"><b>Date </b></label><span class="membership-error">* <?php echo $errorfdate; ?></span>
+            <input type="text" name="mdate" value="<?php echo date('Y-m-d'); ?>" required>
 
-           
-            
+
+
             <div class="mform-btn-container">
                 <div class="mform-btn">
 

@@ -153,7 +153,7 @@ if(isset($_POST['individual_submit']))
 	if (!preg_match($frefname, $mrefname)) {
 		$error['frefnamet'] = "Invalid input.";
 		$errorfrefname = "Invalid input.";
-	}                if ($row_result == 1) {
+	}               
 
 	//-----Reference member detail - input email/mobile number validation
 	 
@@ -253,17 +253,16 @@ if(isset($_POST['individual_submit']))
 			'email' => $memail,
 			'profession' => $mprofession,
 			'name_ins' => $mnameins,
+			'type_institution' => $not_applicable,
 			'place_ins' => $mplaceins,
 			'interest' => $minterest,
-			'designation' => $mdesignation, 
-			'institution_type' => $not_applicable,
-			'institution_address' =>$not_applicable,
+			'designation' => $mdesignation, 	
 			'pay_status' => $none,
 			'transaction_type' => $none,
 			'transaction_id' => $none,
 			'ref_name' => $mrefname,
 			'ref_detail' => $mrefdet,  
-			'id_proof_type' => $m_id_type,
+			'id_proof_type' => $m_id_proof_type,
 			'id_proof_no' => $m_id_proof_no, 
 			'amount' => $mamount,
 			'upload' => $mupload,
@@ -285,11 +284,10 @@ if(isset($_POST['individual_submit']))
 	}
 }
 
-//########################################################################################
-//########################################################################################
+//=================== End of Individual membership form ================
 
 
-//==================Membership form - Institution ============== 
+//-----------------------Membership form - Institution ---------------
 if(isset($_POST['institution_submit']))
 {
 
@@ -300,17 +298,15 @@ if(isset($_POST['institution_submit']))
 		$mtelres = $_POST["mtelres"];
 		$mteloff = $_POST["mteloff"];
 		$mmob = $_POST["mmob"];
-		$memail = $_POST["memail"];
+		$memail = $_POST["memail"]; 
 		$mnameins = $_POST["mnameins"];
-		$mtype_institution = $_POST["mtype_institution"];
+		$mtype_institution = $_POST["mtype_institution"]; 
 		$minstitution_address = $_POST["minstitution_address"];
 		$minterest = $_POST["minterest"];
 		$mrefname = $_POST["mrefname"];
 		$mrefdet = $_POST["mrefdet"];
-		/*
-		$id_proof_type = $_POST["id_proof_type"];
-		$id_proof_no = $_POST["id_proof_no"];
-		*/
+		$m_id_proof_type = $_POST["id_proof_type"];
+		$m_id_proof_no = $_POST["id_proof_no"];		
 		$mamount = $_POST["mamount"];
 		$mplace = $_POST["mplace"];
 		$mdate =  date('Y-m-d');
@@ -417,22 +413,23 @@ if(isset($_POST['institution_submit']))
 		$errorfrefdet = "Not a valid input.";		
 	 
 	} 
-/*
-	//-----Id_Proof_Type - input text validation
-	$f_id_proof_type = "-Select-";
-	if ($id_proof_type = $f_id_proof_type)
+	//-----Id_proof_type - input text validation
+	$fid_proof_type = "-Select-";
+	if ($m_id_proof_type == $fid_proof_type)
 	{
-		$error['fid_proof_type'] = "Not a valid input";
-		$errorfid_proof_types = "Not a valid input.";
+		$error['fid_proof_type'] = "Select a Valid ID Proof type.";
+		$errorfid_proof_type = "Select a Valid ID Proof type.";
 	}
-	//-----Id_Proof_no - input text validation
-	$fid_proof_no = "/^[0-9]\/+$/";
-	if (!preg_match($fid_proof_no, $id_proof_no))
+	
+ 	
+	//-----Id_no - input text validation
+	$fid_proof_no = "/^[A-Za-z0-9,\/]+$/";
+	if (!preg_match($fid_proof_no, $m_id_proof_no))
 	{
 		$error['fid_proof_no'] = "Not a valid input";
 		$errorfid_proof_no = "Not a valid input.";
 	}
-*/	
+
 	//-----Place of application - input text validation
 	$fplace = "/^[a-zA-Z]+$/";
 	if (!preg_match($fplace, $mplace)) {
@@ -459,23 +456,20 @@ if(isset($_POST['institution_submit']))
 			'tel_res' => $mtelres,
 			'tel_off' => $mteloff,
 			'mob' => $mmob,
-			'email' => $memail,
-			'profession' => $mprofession,
+			'email' => $memail ,
+			'profession' => $not_applicable,
 			'name_ins' => $mnameins,
-			'place_ins' => $not_applicable,
+			'type_institution' => $mtype_institution,
+			'place_ins' => $minstitution_address,
 			'interest' => $minterest,
-			'designation' => $mdesignation,
-			'institution_type' => $mtype_institution,
-			'institution_address' => $maddress,
+			'designation' => $mdesignation,			
 			'pay_status' => $none,
 			'transaction_type' => $none,
 			'transaction_id' => $none,
 			'ref_name' => $mrefname,
-			'ref_detail' => $mrefdet,
-			/*
-			'id_proof_type' => $m_id_type,
-			'id_proof_no' => $m_id_proof_no,	
-			*/		
+			'ref_detail' => $mrefdet,			
+			'id_proof_type' => $m_id_proof_type,
+			'id_proof_no' => $m_id_proof_no,			
 			'amount' => $mamount,
 			'place' => $mplace,
 			'app_date' => $mdate
@@ -491,5 +485,3 @@ if(isset($_POST['institution_submit']))
 
 	}
 }
-}
-
