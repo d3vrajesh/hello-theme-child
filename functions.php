@@ -309,7 +309,7 @@ if(isset($_POST['institution_submit']))
 		$m_id_proof_no = $_POST["id_proof_no"];		
 		$mamount = $_POST["mamount"];
 		$mplace = $_POST["mplace"];
-		$mdate =  date('Y-m-d');
+		$mdate =  date('Y-m-d');*/
  
 	//-----------Form input Validation-----------	
 	$error = array();
@@ -358,7 +358,7 @@ if(isset($_POST['institution_submit']))
 		$error['email'] = "Invalid e-mail.";
 		$errorfemail = "Invalid e-mail.";
 	}
-
+/*
 	//-----Name of institution - input text validation
 	$fnameins = "/^[a-zA-Z\s]+$/";
 	if (!preg_match($fnameins, $mnameins)) {
@@ -429,13 +429,12 @@ if(isset($_POST['institution_submit']))
 		$error['fid_proof_no'] = "Not a valid input";
 		$errorfid_proof_no = "Not a valid input.";
 	}
-
 	//-----Place of application - input text validation
 	$fplace = "/^[a-zA-Z]+$/";
 	if (!preg_match($fplace, $mplace)) {
 		$error['fplace'] = "Not a valid input.";
 		$errorfplace = "not a valid input.";
-	} 
+	} */
 	//---Passing default values to the default values 
 	$default_app_status = "Pending";
 	$not_applicable = "Not applicable";
@@ -473,7 +472,7 @@ if(isset($_POST['institution_submit']))
 			'amount' => $mamount,
 			'place' => $mplace,
 			'app_date' => $mdate
-			
+			*/
 			);
 
 		$row_result = $wpdb->insert($nnhs_table_name, $data_array, $format=null);	
