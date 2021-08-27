@@ -27,10 +27,17 @@ require_once("functions.php");
 
             <?php 
                 if ($row_result == 1) {
-                  //  $mail_subject = "New member" . $mname . "has registered for NNHS membership";
-                  //  wp_mail('rajeshr@keystone-foundation.org', $mail_subject, $message);
-
-                    wp_redirect('https://nnhs.in/thank-you/');                  
+                   
+                    
+					if ($row_result == 1) {
+                        $to[] = 'email1@example.com'; 
+                        $to[] = 'email2@example.com'; 
+                        $subject = "New member has registered for NNHS membership";
+                        $body = "New member " . $mname . " has registered for NNHS membership" ."<br>". "Please note: This is an auto generated mail, Please do not reply to this mail."  ;
+                        $headers = array('Content-Type: text/html; charset=UTF-8', 'Cc: email2@example.com', 'From: NNHS <wordpress@domain.in>');					 
+                         wp_mail( $to, $subject, $body, $headers );
+                        wp_redirect('https://nnhs.in/thank-you/');  
+                    }                      
                        
                 }       
                 
@@ -62,8 +69,8 @@ require_once("functions.php");
 
             <label for="maddress"><b>Address</b></label> <span class="membership-error">*
                 <?php echo $errorfaddress; ?></span>
-            <textarea name="maddress" rows="5" cols="33" class="textarea" maxlength="200"
-                value="<?= isset($_POST['maddress']) ? $_POST['maddress'] : ''; ?>" required> Address</textarea>
+            <textarea name="maddress" placeholder="Address" rows="5" cols="33" class="textarea" maxlength="200"
+                value="<?= isset($_POST['maddress']) ? $_POST['maddress'] : ''; ?>" required></textarea>
 
             <label for="mtelres"><b>Telephne-Residential</b></label><span class="membership-error">
                 <?php echo $errorftelres; ?></span>
@@ -92,7 +99,7 @@ require_once("functions.php");
                 <?php echo $errorfnameins; ?></span>
             <input type="text" placeholder="Name of Institution" name="mnameins"
                 value="<?= isset($_POST['mnameins']) ? $_POST['mnameins'] : ''; ?>">
-            
+
             <label for="mplaceins"><b>Place of Institution</b></label> <span class="membership-error">
                 <?php echo $errorfplaceins; ?></span>
             <input type="text" placeholder="Place of Institution" name="mplaceins"
@@ -105,9 +112,9 @@ require_once("functions.php");
 
             <label for="minterest"><b>Nature of Interest</b></label><span
                 class="membership-error">*<?php echo $errorfinterest; ?> </span>
-            <textarea name="minterest" rows="5" cols="33" class="textarea"
+            <textarea name="minterest" placeholder="Describe your Nature of Interest" rows="5" cols="33" class="textarea"
                 value="<?= isset($_POST['minterest']) ? $_POST['minterest'] : ''; ?>"
-                required> Describe your Nature of Interest..</textarea>
+                required></textarea>
 
             <label for="mrefname"><b>Referred by NNHS member (Please mention Name) </b></label><span
                 class="membership-error">* <?php echo $errorfrefname; ?></span>
@@ -155,7 +162,7 @@ require_once("functions.php");
             <div class="mform-btn-container">
                 <div class="mform-btn">
 
-                    <button type="submit" class="registerbtn" name="individual_submit">Register</button>
+                    <button type="submit" class="registerbtn" name="individual_submit">Submit</button>
                 </div>
             </div>
         </form>

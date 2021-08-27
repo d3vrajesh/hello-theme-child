@@ -27,11 +27,13 @@ require_once("functions.php");
 
             <?php 
                 if ($row_result == 1) {
-                                     //  $mail_subject = "New member" . $mname . "has registered for NNHS membership";
-                  //  wp_mail('rajeshr@keystone-foundation.org', $mail_subject, $message);
-
-                   wp_redirect('https://nnhs.in/thank-you/');                  
-                  
+                    $to[] = 'email1@example.com'; 
+					$to[] = 'email2@example.com'; 
+					$subject = "New member has registered for NNHS membership";
+					$body = "New member " . $mname . " has registered for NNHS membership" ."<br>". "Please note: This is an auto generated mail, Please do not reply to this mail."  ;
+					$headers = array('Content-Type: text/html; charset=UTF-8', 'Cc: email2@example.com', 'From: NNHS <wordpress@domain.in>');					 
+ 					wp_mail( $to, $subject, $body, $headers );
+                    wp_redirect('https://nnhs.in/thank-you/');  
                 }       
                 
                 else {
@@ -90,15 +92,15 @@ require_once("functions.php");
 
             <label for="minstitution_address"><b>Institution Address</b></label> <span class="membership-error">*
                 <?php echo $errorfinstitution_address; ?></span>
-            <textarea name="minstitution_address" rows="5" cols="33" class="textarea" maxlength="200"
+            <textarea name="minstitution_address" placeholder="Institution Address" rows="5" cols="33" class="textarea" maxlength="200"
                 value="<?= isset($_POST['minstitution_address']) ? $_POST['minstitution_address'] : ''; ?>"
-                required> Address</textarea>
+                required> </textarea>
 
             <label for="minterest"><b>Nature of Interest</b></label><span
                 class="membership-error">*<?php echo $errorfinterest; ?> </span>
-            <textarea name="minterest" rows="5" cols="33" class="textarea"
+            <textarea name="minterest" placeholder="Describe your Nature of Interest" rows="5" cols="33" class="textarea"
                 value="<?= isset($_POST['minterest']) ? $_POST['minterest'] : ''; ?>"
-                required> Describe your Nature of Interest..</textarea>
+                required> </textarea>
 
             <label for="mrefname"><b>Referred by NNHS member (Please mention Name) </b></label><span
                 class="membership-error">* <?php echo $errorfrefnamet; ?></span>
@@ -141,7 +143,7 @@ require_once("functions.php");
             <div class="mform-btn-container">
                 <div class="mform-btn">
 
-                    <button type="submit" class="registerbtn" name="institution_submit">Register</button>
+                    <button type="submit" class="registerbtn" name="institution_submit">Submit</button>
                 </div>
             </div>
         </form>
