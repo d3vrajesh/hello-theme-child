@@ -181,3 +181,16 @@ select:focus {
   object-fit: contain;
 
 }
+/*Javascript */
+.input-msg{
+	font-size: 18px;
+	padding-top: 10px;
+}
+.text-red{
+	color: red;
+  font-size: 14px;
+}
+
+.input-control{
+	width: 100%;
+}

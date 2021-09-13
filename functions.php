@@ -33,9 +33,9 @@ add_filter( 'hello_elementor_page_title', 'ele_disable_page_title' );
 //------Custom Script attachment (mform.js) --------------
 add_action( 'wp_enqueue_scripts', 'my_custom_script_load' );
 function my_custom_script_load(){
-  wp_enqueue_script( 'my-custom-script', get_stylesheet_directory_uri() . '/mform', array( 'jquery' ) );
+  wp_enqueue_script( 'my-custom-script', get_stylesheet_directory_uri() . '/mform.js', array( 'jquery' ) );
 }
-
+ 
 //==================Membership form - Individual ============== 
 if(isset($_POST['individual_submit']))
 {

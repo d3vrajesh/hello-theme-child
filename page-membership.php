@@ -112,9 +112,12 @@ require_once("functions.php");
 
             <label for="minterest"><b>Nature of Interest</b></label><span
                 class="membership-error">*<?php echo $errorfinterest; ?> </span>
-            <textarea name="minterest" placeholder="Describe your Nature of Interest" rows="5" cols="33" class="textarea"
-                value="<?= isset($_POST['minterest']) ? $_POST['minterest'] : ''; ?>"
-                required></textarea>
+                              
+            <textarea class="input-control count-chars textarea" name="minterest" placeholder="Describe your Nature of Interest" rows="5" cols="33" maxlength="60" data-max-chars="200" value="<?= isset($_POST['minterest']) ? $_POST['minterest'] : ''; ?>" required></textarea>
+            <label class="input-msg text-red"> </label>
+                </br>
+                </br>
+                
 
             <label for="mrefname"><b>Referred by NNHS member (Please mention Name) </b></label><span
                 class="membership-error">* <?php echo $errorfrefname; ?></span>
@@ -125,6 +128,7 @@ require_once("functions.php");
                 <?php echo $errorfrefdet; ?></span>
             <input type="text" placeholder="Referral member's detail" name="mrefdet"
                 value="<?= isset($_POST['mrefdet']) ? $_POST['mrefdet'] : ''; ?>" required>
+            
             <label for="mem_id_proof_type"><b>ID Proof type </b></label><span class="membership-error">*
                 <?php echo $errorfid_proof_type; ?></span>
             <select name="mem_id_proof_type"
